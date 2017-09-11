@@ -27,9 +27,18 @@ def pokemon():
     pokeInfo = {'name': infoJSON['name']}
     pokeInfo['attack'] = infoJSON['attack']
     pokeInfo['defense'] = infoJSON['defense']
+    pokeInfo['sp_attack'] = infoJSON['sp_atk']
+    pokeInfo['sp_defense'] = infoJSON['sp_def']
     pokeInfo['height'] = infoJSON['height']
     pokeInfo['weight'] = infoJSON['weight']
     pokeInfo['id'] = infoJSON['pkdx_id']
+    pokeInfo['evolutions'] = infoJSON['evolutions']
+
+    types = []
+    typesArray = infoJSON['types']
+    for t in typesArray:
+        types.append(t['name'])
+    pokeInfo['types'] = types
 
     descriptions = infoJSON['descriptions']
     descriptionInfo = descriptions[len(descriptions) - 1]
@@ -45,6 +54,7 @@ def pokemon():
 
     pokeCache[pid] = pokeInfo
     return jsonify(pokeInfo)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
